@@ -1,0 +1,70 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Hello TypeController!{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('message')  %}
+        <span class="notify text-center "> {{message}} </span>
+    {% endfor %}
+        <h3 class="text-center text-danger">List Type</h3>
+        <table class="text-center table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Type Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+               
+             
+                   
+                 {% for type in data %}
+          
+                  
+                    <tr>
+                        
+                        <td> {{type.id}}</td>
+                 
+                        <td>   {{type.typeName}}</td>
+                        <td width="400"> {{ type.typeDescription|raw}}</td>
+             
+                        <td>
+                            <a style="font-size: 30px;" href="{{path('edit_type',{'id':type.id})}}"><i
+                                    class="fas fa-edit"></i></a>
+                            <a onclick="return confirm('Deleting this type will delete equipments of this type?');"
+                                style="color:red; font-size: 30px;"
+                                href="{{path('delete_type',{'id':type.id})}}"><i
+                                    class="fas fa-trash"></i></a>
+                        </td> 
+    
+                    </tr>
+                {% endfor %}
+    
+            </tbody>
+        </table>
+        {# <script type="text/javascript">
+            var route = "{{ url('autocomplete-search') }}";
+            $('#search2').typeahead({
+                source: function(query, process) {
+                    return $.get(route, {
+                        query: query
+                    }, function(data) {
+                        return process(data);
+                    });
+                }
+            });
+        </script> #}
+
+    
+{% endblock %}
+
+
+
+
+
+
+
+
+
